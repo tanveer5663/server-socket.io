@@ -31,7 +31,7 @@ app.use(cors());
 app.get(
   "/",
   asyncHandler(async (req, res) => {
-    res.json({ message: "I am tanveer and I have complete BCA" });
+    res.json({ message: "I am tanveer and I have complete BCA And i am learning Node.js" });
   }),
 );
 
