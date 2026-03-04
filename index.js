@@ -73,6 +73,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message || "Something went wrong!" });
 });
 
-server.listen(9000, () => {
+server.listen(PORT, () => {
   console.log("Server is running on port 9000");
 });
