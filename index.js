@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import { asyncHandler } from "./async.js";
 import { Server } from "socket.io";
@@ -5,6 +6,7 @@ import { createServer } from "http";
 import cors from "cors";
 const app = express();
 const server = createServer(app);
+const PORT = process.env.PORT || 9000;
 app.use(cors());
 // const io = new Server(server, {
 //   cors: {
@@ -31,7 +33,9 @@ app.use(cors());
 app.get(
   "/",
   asyncHandler(async (req, res) => {
-    res.json({ message: "I am tanveer and I have complete BCA And i am learning Node.js" });
+    res.json({
+      message: "I am tanveer and I have complete BCA And i am learning Node.js",
+    });
   }),
 );
 
@@ -53,7 +57,7 @@ app.get(
 
     const intervalId = setInterval(() => {
       const data = {
-        time: "tanveer"
+        time: "tanveer",
       };
 
       res.write(`data: ${JSON.stringify(data)}\n\n`);
