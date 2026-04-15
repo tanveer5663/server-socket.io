@@ -3,11 +3,15 @@ import express from "express";
 import { asyncHandler } from "./async.js";
 import { Server } from "socket.io";
 import { createServer } from "http";
+import otpRouter from "./routes/otp.js";
 import cors from "cors";
+import fileUploadRouter from "./routes/fileUploadProgress.js";
 const app = express();
+
 const server = createServer(app);
 const PORT = process.env.PORT || 9000;
 app.use(cors());
+app.use(express.json());
 // const io = new Server(server, {
 //   cors: {
 //     origin: "*", // allow all origins
@@ -30,6 +34,16 @@ app.use(cors());
 //     console.log("User disconnected:", socket.id);
 //   });
 // });
+
+setInterval(
+  () => {
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  },
+  1000 * 60 * 5,
+);
 app.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -69,6 +83,8 @@ app.get(
     });
   }),
 );
+app.use("/api", otpRouter);
+app.use("/api", fileUploadRouter);
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message || "Something went wrong!" });
 });
