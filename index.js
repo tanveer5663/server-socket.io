@@ -42,7 +42,7 @@ setInterval(
       .then((data) => console.log(data))
       .catch((error) => console.error("Error fetching data:", error));
   },
-  1000 * 60 * 5,
+  1000 * 60,
 );
 app.get(
   "/",
